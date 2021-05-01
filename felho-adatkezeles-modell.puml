@@ -1,0 +1,26 @@
+@startuml
+
+package Firebase as firebase {
+    cloud hosting
+    cloud "realtime database" as realtimeDb
+}
+
+interface websocket
+interface rest
+interface http
+
+realtimeDb -down- websocket
+realtimeDb -down- rest
+hosting -down- http
+
+agent bönngésző as browser
+
+http ).down.> browser : JS alkalmazás
+
+websocket ).down.> browser : adatok leküldése
+
+node rpi
+
+rpi -up-( rest : friss adatok feltöltése
+
+@enduml
